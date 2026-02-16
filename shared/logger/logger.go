@@ -19,6 +19,7 @@ func Infof(format string, v ...interface{}) {
 }
 func Error(err error) {
 	logger.Error().Err(err).Send()
+	os.Exit(1)
 }
 func Debug(message string) {
 	logger.Info().Msg(message)

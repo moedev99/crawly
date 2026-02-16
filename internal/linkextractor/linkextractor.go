@@ -1,4 +1,4 @@
-package checker
+package linkextractor
 
 import (
 	"net/url"
@@ -7,7 +7,9 @@ import (
 	"golang.org/x/net/html"
 )
 
-func extractUrl(attrs []html.Attribute, baseUrl string) string {
+var uniqueUrls = make(map[string]bool)
+
+func ExtractUrl(attrs []html.Attribute, baseUrl string) string {
 	for _, val := range attrs {
 		if val.Key == "href" {
 			normalizedUrl := normalizeUrl(val.Val, baseUrl)

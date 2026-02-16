@@ -3,11 +3,10 @@ package checker
 import (
 	"net/http"
 
+	"github.com/moedev/crawly/internal/linkextractor"
 	"github.com/moedev/crawly/shared/logger"
 	"golang.org/x/net/html"
 )
-
-var uniqueUrls = make(map[string]bool)
 
 func GetStatusCode(url string) {
 	res, err := http.Get(url)
@@ -24,7 +23,7 @@ func RemoveDuplicateUrls(anchors []*html.Node, baseUrl string) []string {
 	var urls []string
 
 	for _, anchor := range anchors {
-		url := extractUrl(anchor.Attr, baseUrl)
+		url := linkextractor.ExtractUrl(anchor.Attr, baseUrl)
 		if url != "" {
 			urls = append(urls, url)
 		}
