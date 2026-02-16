@@ -3,8 +3,8 @@ package checker
 import (
 	"net/http"
 
-	"github.com/moedev/crawly/internal/linkextractor"
-	"github.com/moedev/crawly/shared/logger"
+	"github.com/moedev99/crawly/internal/linkextractor"
+	"github.com/moedev99/crawly/shared/logger"
 	"golang.org/x/net/html"
 )
 

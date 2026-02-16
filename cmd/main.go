@@ -4,8 +4,8 @@ import (
 	"errors"
 	"os"
 
-	"github.com/moedev/crawly/crawly"
-	"github.com/moedev/crawly/shared/logger"
+	"github.com/moedev99/crawly/crawly"
+	"github.com/moedev99/crawly/shared/logger"
 )
 
 func main() {

@@ -5,9 +5,9 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/moedev/crawly/checker"
-	"github.com/moedev/crawly/internal/htmltraverser"
-	"github.com/moedev/crawly/shared/logger"
+	"github.com/moedev99/crawly/checker"
+	"github.com/moedev99/crawly/internal/htmltraverser"
+	"github.com/moedev99/crawly/shared/logger"
 	"golang.org/x/net/html"
 )
 
