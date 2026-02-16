@@ -16,7 +16,11 @@ func GetStatusCode(url string) {
 	}
 	defer res.Body.Close()
 
-	logger.Infof("url=%s statusCode=%d ✅", url, res.StatusCode)
+	if res.StatusCode >= 200 && res.StatusCode <= 299 {
+		logger.Infof("url=%s statusCode=%d ✅", url, res.StatusCode)
+	} else {
+		logger.Infof("url=%s statusCode=%d ❌", url, res.StatusCode)
+	}
 }
 
 func RemoveDuplicateUrls(anchors []*html.Node, baseUrl string) []string {
