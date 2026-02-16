@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"os"
 
 	"github.com/moedev99/crawly/crawly"
@@ -15,7 +16,7 @@ func main() {
 
 	arg := os.Args[1]
 	if arg == "-help" {
-		logger.Info("Usage: crawly [OPTIONS]\nOptions:\n  crawly url \n")
+		fmt.Printf("Usage: crawly [OPTIONS]\nOptions:\n  crawly url \n")
 		return
 	}
 
