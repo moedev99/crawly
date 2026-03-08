@@ -1,25 +1,18 @@
 package main
 
 import (
-	"errors"
-	"fmt"
+	"net/http"
 	"os"
+	"time"
 
+	"github.com/moedev99/crawly/checker"
 	"github.com/moedev99/crawly/crawly"
-	"github.com/moedev99/crawly/shared/logger"
 )
 
 func main() {
-	if len(os.Args) == 1 {
-		logger.Error(errors.New("Please pass url to check, or run -help"))
+	out := os.Stdout
+	client := &http.Client{
+		Timeout: 5 * time.Second,
 	}
-
-	arg := os.Args[1]
-	if arg == "-help" {
-		fmt.Printf("Usage: crawly [OPTIONS]\nOptions:\n  crawly url \n")
-		return
-	}
-
-	crawly.Crawl(arg)
-
+	os.Exit(crawly.Main(os.Args[1:], out, checker.NewChecker(out, client)))
 }

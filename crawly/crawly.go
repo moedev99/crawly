@@ -1,42 +1,36 @@
 package crawly
 
 import (
-	"net/http"
-	"net/url"
+	"fmt"
+	"io"
 	"sync"
 
+	"github.com/fatih/color"
 	"github.com/moedev99/crawly/checker"
-	"github.com/moedev99/crawly/internal/htmltraverser"
-	"github.com/moedev99/crawly/shared/logger"
-	"golang.org/x/net/html"
 )
 
-func Crawl(arg string) {
-	if _, err := url.ParseRequestURI(arg); err != nil {
-		logger.Error(err)
-	}
+var usage = `Usage: crawly URL
+Example:
+	crawly https://www.example.com`
 
-	res, err := http.Get(arg)
-	if err != nil {
-		logger.Error(err)
+func Main(args []string, out io.Writer, c *checker.Checker) int {
+	if len(args) == 0 || len(args) >= 2 {
+		fmt.Println(usage)
+		return 1
 	}
-	defer res.Body.Close()
-	doc, err := html.Parse(res.Body)
-	if err != nil {
-		logger.Error(err)
-	}
-
-	var anchors []*html.Node
-	htmltraverser.GetAnchorsDFS(doc, &anchors)
+	site := args[0]
 
 	var wg sync.WaitGroup
-
-	urls := checker.RemoveDuplicateUrls(anchors, arg)
-	for _, url := range urls {
-		wg.Go(func() {
-			checker.GetStatusCode(url)
-		})
+	wg.Go(
+		func() {
+			c.Check(site)
+		},
+	)
+	wg.Wait()
+	fmt.Fprint(c.Output, color.YellowString("FINAL REPORT:\n"))
+	for _, result := range c.Results {
+		fmt.Fprintf(c.Output, "%s status -> %q\n", result.Status, result.Link)
 	}
 
-	wg.Wait()
+	return 0
 }
