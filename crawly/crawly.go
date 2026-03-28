@@ -2,7 +2,6 @@ package crawly
 
 import (
 	"fmt"
-	"io"
 	"sync"
 
 	"github.com/fatih/color"
@@ -13,7 +12,7 @@ var usage = `Usage: crawly URL
 Example:
 	crawly https://www.example.com`
 
-func Main(args []string, out io.Writer, c *checker.Checker) int {
+func Main(args []string, c *checker.Checker) int {
 	if len(args) == 0 || len(args) >= 2 {
 		fmt.Println(usage)
 		return 1

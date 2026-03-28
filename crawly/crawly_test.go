@@ -25,7 +25,7 @@ func TestCrawlyMain(t *testing.T) {
 	for i, r := range c.Results {
 		t.Logf("[%d] %+v", i, r)
 	}
-	crawly.Main([]string{clientTest.URL}, out, c)
+	crawly.Main([]string{clientTest.URL}, c)
 	base := clientTest.URL
 	want := []checker.Result{
 		{Link: base, Status: checker.OKAY},

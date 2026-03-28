@@ -14,5 +14,5 @@ func main() {
 	client := &http.Client{
 		Timeout: 5 * time.Second,
 	}
-	os.Exit(crawly.Main(os.Args[1:], out, checker.NewChecker(out, client)))
+	os.Exit(crawly.Main(os.Args[1:], checker.NewChecker(out, client)))
 }
