@@ -36,9 +36,6 @@ func NewChecker(out io.Writer, client *http.Client) *Checker {
 		Results:    make([]Result, 0),
 	}
 }
-func (c *Checker) Res() []Result {
-	return c.Results
-}
 
 // AddResutl will write to the output if there is an error otherwise it will print the successful hit later.
 func (c *Checker) AddResult(link string, status string, isError bool) {
