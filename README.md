@@ -29,6 +29,7 @@ crawly/
 5. Optionally check status codes
 6. Log results
 
+
 ## ▶️ Usage
 
 ```bash
